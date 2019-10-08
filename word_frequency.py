@@ -47,10 +47,10 @@ def print_word_freq(file):
 
     sorted_word_count = sorted(word_count.items(), key=lambda x: x[1], reverse=True)
 
-    longest_word_len = len(get_longest_word(sorted_word_count))
+    longest_word_len = len(get_longest_word(words))
 
-    for word, sorted_word in sorted_word_count[:10]:
-        print(word.rjust(longest_word_len), "|", str(sorted_word).ljust(3), "*" * sorted_word)
+    for word, value in sorted_word_count[:10]:
+        print(word.rjust(longest_word_len), "|", str(value).ljust(3), "*" * value)
 
 
 if __name__ == "__main__":
