@@ -1,42 +1,32 @@
-import string
-
 STOP_WORDS = [
     'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'has', 'he',
     'i', 'in', 'is', 'it', 'its', 'of', 'on', 'that', 'the', 'to', 'were',
     'will', 'with'
 ]
 
-def clean_text(text):
-    text = text.lower()
-    all_letters = "abcdefghijklmnopqrstuvwxyz"
-    text_to_keep = ""
-    for char in text:
-        if char in all_letters:
-            text_to_keep += char
-    return text_to_keep
-
-def clean_texts(text):
-    text = text.strip(string.punctuation)
-    text = text.lower()
-    if text[-2:] == "'s":
-        text = text[:-2]
-    return text
-
-def get_longest_word(words):
-    return sorted(words, key=len, reverse=True)[0]
 
 def print_word_freq(file):
     """Read in `file` and print out the frequency of words in that file."""
     
-    with open(file) as text_file:
-        contents = text_file.read()
+    text_file = open(file, 'r')
+
+    contents = text_file.read()
 
     words = contents.split()
+
+    def clean_text(text):
+        text = text.lower()
+        all_letters = "abcdefghijklmnopqrstuvwxyz"
+        text_to_keep = ""
+        for char in text:
+            if char in all_letters:
+                text_to_keep += char
+        return text_to_keep
 
     clean_words = []
 
     for word in words:
-        clean_words.append(clean_texts(word))
+        clean_words.append(clean_text(word))
 
     go_words = [word for word in clean_words if word not in STOP_WORDS]
 
